@@ -1,4 +1,4 @@
 event_circle
 ============
 
-my cuurent project
+my curent project
