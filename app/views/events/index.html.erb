@@ -24,7 +24,7 @@
     <% if can? :read, event %>
     <td><%= link_to 'Show', event %></td>
       <% if current_user.is_registered?(event) %>
-        <td><%= link_to 'Registered', '#'%></td>
+        <td><%= link_to 'Registered', '#',class: "test"%></td>
       <% else %>
         <td><%= link_to 'Register', register_event_path(event)%></td>  
       <% end %>
@@ -40,6 +40,10 @@
 </table>
 
 <br />
-
+<script>
+ $(".test").click(function(){
+  alert("registered")
+ })
+</script>
 <%= link_to 'New Event', new_event_path %>
 <%= link_to 'Back', root_path %>

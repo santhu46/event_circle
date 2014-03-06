@@ -1,12 +1,12 @@
 @import url('bootstrap.css');
 @import url('custom-grid.css');
 body{
-background-image:url('../assets/body-back.jpg');
+background-image:url('../body-back.jpg');
 background-repeat:repeat;
 }
 /*------------ Header ---------------------*/
 header {
-background-image:url('../assets/header-back.jpg');
+background-image:url('../header-back.jpg');
 backround-repeat:repeat-x;
 height:132px;
 width:100%;
@@ -42,7 +42,7 @@ color:#aadbd0;
 text-decoration:none;
 }
 .selected{
-background-image:url('../assets/triangle.png');
+background-image:url('../triangle.png');
 background-repeat:no-repeat;
 background-position:center right;
 position:relative;
@@ -51,14 +51,14 @@ right:0;
 
 /*----------------- Container -------------------*/
 section{
-background-image:url('../assets/body-repeat.png');
+background-image:url('../body-repeat.png');
 background-repeat:repeat;
 position:relative;
 width:100%;
 min-height:700px;
 }
 .container-border-top{
-  background-image: url("../assets/body-border-top.png");
+  background-image: url("../body-border-top.png");
     background-position: left 23px;
     background-repeat: repeat-x;
     height: 30px;
@@ -69,6 +69,9 @@ min-height:700px;
 background:#fff;
 padding:1px 0 0 5px;
 /* border-top:10px solid #9fa3b9; */
+}
+.col-md-11:hover {
+    background-color: #ff0;
 }
 .title{
 font-size: 26px;

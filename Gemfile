@@ -9,6 +9,7 @@ gem 'mysql2'
 gem 'rolify'
 gem 'cancan'
 gem "jquery-rails", "~> 3.1.0"
+gem 'jquery-ui-rails'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
