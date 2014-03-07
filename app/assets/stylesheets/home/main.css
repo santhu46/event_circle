@@ -70,7 +70,7 @@ background:#fff;
 padding:1px 0 0 5px;
 /* border-top:10px solid #9fa3b9; */
 }
-.col-md-11:hover {
+table thead:hover {
     background-color: #ff0;
 }
 .title{

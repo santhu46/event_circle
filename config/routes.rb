@@ -10,7 +10,7 @@ EventCircle::Application.routes.draw do
       get 'register'
     end
   end
-  root :to => 'home#index'
+  root :to => 'home#dash_board'
 
   
 
