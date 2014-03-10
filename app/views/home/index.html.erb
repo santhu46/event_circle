@@ -16,7 +16,7 @@
 				<div class="col-md-12">
 
 				<h1 class="tagline">Event Planning. Organizing. and Execution
-					<%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-default pull-right'%></h1>
+					<%= link_to "Sign Out", destroy_user_session_path, class: 'btn btn-default pull-right'%></h1>
 				<img class="logo img-responsive" src="/assets/logo.jpg" alt="Logo"></img>
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 			<div class="content-section">
 			<h2 class="title">Dashboard</h2>
 				<div class="row">
-					<div class="col-md-11 col-md-offset-1 test">
+					<div class="col-md-11 col-md-offset-1 test dash_event">
 							<table class="table table-striped box-border">
 							<thead class="box-head">
 								  <tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Attended</span></strong></td></tr>
@@ -50,9 +50,9 @@
 						
 							<tbody>
 							<tr>
-									<td><strong>Title</strong></td>
+									<td><strong><%= session[:role]%></strong></td>
 									<td><strong>Venue</strong></td>
-									<td><strong>Starts</strong></td>
+									<td><strong>Start Date</strong></td>
 								</tr>
 								<% @events_attended.each do |event|%>
 								<tr>
@@ -64,8 +64,7 @@
 							</tbody>
 						 </table>
 					</div>
-					
-					<div class="col-md-11">
+					<div class="col-md-11 dash_event">
 						<table class="table table-striped box-border">
 						   <thead class="box-head">
 							  <tr>
@@ -76,7 +75,7 @@
 							<tr>
 									<td><strong>Title</strong></td>
 									<td><strong>Venue</strong></td>
-									<td><strong>Starts</strong></td>
+									<td><strong>Start Date</strong></td>
 								</tr>
 								<% @events_published.each do |event|%>
 								<tr>
@@ -89,9 +88,11 @@
 						 </table>
 					</div>
 				</div> <!-- Row closing -->		
-				
+
+							<%if @role == "host"%>
+
 				<div class="row">
-					<div class="col-md-11 col-md-offset-1">
+					<div class="col-md-11 col-md-offset-1 dash_event">
 						<table class="table table-striped box-border">
 							<thead class="box-head some" id="button">
 								  <tr><td colspan='3'><strong>Events <span style="color:#e06d21;">Need to Host</span></strong></td></tr>
@@ -100,7 +101,7 @@
 								<tr>
 									<td><strong>Title</strong></td>
 									<td><strong>Venue</strong></td>
-									<td><strong>Starts</strong></td>
+									<td><strong>Start Date</strong></td>
 								</tr>
 								<% @events_for_publish.each do |event|%>
 								<tr>
@@ -112,25 +113,33 @@
 							</tbody>
 						 </table>
 					</div>
-					
-					<div class="col-md-11">
+					<div class="col-md-11 dash_event">
 						<table class="table table-striped box-border" id ="effect">
 						   <thead class="box-head" >
 							  <tr>
-								<tr><td><strong>Events <span style="color:#e06d21;">Attended</span></strong></td></tr>
+								<tr><td colspan='3'><strong>Events <span style="color:#e06d21;">Published By You</span></strong></td></tr>
 							  </tr>
 						   </thead>
-						   <tbody>
-							<tr><td>&nbsp;</td></tr>
-							<tr><td>&nbsp;</td></tr>
-							<tr><td>&nbsp;</td></tr>
-							<tr><td>&nbsp;</td></tr>
-						  </tbody>
+						  <tbody>
+								<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+								</tr>
+								<% @events_published_by_you.each do |event|%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+								</tr>
+								<% end %>
+							</tbody>
 						 </table>
 					</div>
 				</div> <!-- Row closing -->		
 
-			
+							<% end %>
+
 			<div class="clearfix"></div>
 			</div> <!-- Content-section closing -->
 		</div> <!-- Col-custom-21 closing -->
@@ -147,32 +156,10 @@
     <!--<script src="js/bootstrap.min.js"></script> -->
 
     <%= javascript_include_tag 'home/main'%>
- <style>
-.toggler { width: 500px; height: 200px; position: relative; }
-#button { padding: .5em 1em; text-decoration: none; }
-#effect { width: 240px; height: 135px; padding: 0.4em; position: relative; background: #fff; }
-#effect h3 { margin: 0; padding: 0.4em; text-align: center; }
-</style>
-<script>
-$(function() {
-var state = true;
-$( "#button" ).click(function() {
-if ( state ) {
-$( "#effect" ).animate({
-backgroundColor: "#aa0000",
-color: "#fff",
-width: 500
-}, 1000 );
-} else {
-$( "#effect" ).animate({
-backgroundColor: "#fff",
-color: "#000",
-width: 440
-}, 1000 );
-}
-state = !state;
-});
-});
-</script>
+ 
 </body>
+
+<script>
+
+</script>
 </html>

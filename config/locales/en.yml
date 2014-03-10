@@ -5,3 +5,8 @@ en:
   devise:
     failure:
       unauthenticated: ''
+    dash_board:
+      user:
+        signed_in: "Signed in Successfully"
+
+ 

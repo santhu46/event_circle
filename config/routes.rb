@@ -1,16 +1,20 @@
 EventCircle::Application.routes.draw do
-  get "home/index"
 
-  get "users/home"
+  devise_for :users, controllers: { sessions: "users/dash_board" }
 
-  devise_for :users    
-      
+   devise_scope :user do
+         get '/home' => "devise/sessions#new", :as => :new_user_session
+         post '/dash_board' => 'users/dash_board#create', :as => :user_session
+         get '/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
   resources :events do
     member do
       get 'register'
     end
   end
   root :to => 'home#index'
+ 
 
   
 
