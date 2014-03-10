@@ -9,13 +9,13 @@
 User.delete_all
 Event.delete_all
 
-@host1 =User.create(uname: "host1", email: "host@test.com", password: "santhu46", password_confirmation: "santhu46" )
+@host1 =User.create(uname: "host1", email: "host@test.com", password: "host123", password_confirmation: "santhu46" )
  @host1.add_role :host
  @host1.save
- @host =User.create(uname: "guest1", email: "guest@test.com", password: "santhu46", password_confirmation: "santhu46")
+ @host =User.create(uname: "guest1", email: "guest@test.com", password: "guest123", password_confirmation: "santhu46")
  @host.add_role :guest
  @host.save
- @host =User.create(uname: "admin1", email:"admin@test.com", password: "santhu46", password_confirmation: "santhu46")
+ @host =User.create(uname: "admin1", email:"admin@test.com", password: "admin123", password_confirmation: "santhu46")
  @host.add_role :admin
  @host.save
 
