@@ -6,7 +6,9 @@ EventCircle::Application.routes.draw do
          get '/home' => "devise/sessions#new", :as => :new_user_session
          post '/dash_board' => 'users/dash_board#create', :as => :user_session
          get '/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+
   end
+  match  '/about_us'   => "home#about", as: :about_us
 
   resources :events do
     member do

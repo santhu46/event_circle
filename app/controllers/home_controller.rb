@@ -10,4 +10,8 @@ class HomeController < ApplicationController
         @events_published_by_you = current_user.events.where(published: true)
       end
   end
+  
+  def about
+  end
+
 end

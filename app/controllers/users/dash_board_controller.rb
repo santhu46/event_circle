@@ -14,5 +14,5 @@ class Users::DashBoardController < Devise::SessionsController
 			redirect_to new_user_session_path,notice: " Please Select your Role" 
 		  end
 	end
-
+	
 end
