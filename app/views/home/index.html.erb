@@ -16,8 +16,8 @@
 		<div class="col-custom-md-21">
 			<div class="content-section">
 			<h2 class="title">Dashboard</h2>
-				<div class="row">
-					<div class="col-md-11 col-md-offset-1 test dash_event">
+				<div class="some">
+					<div class="header1 fixed" style ="float:left;margin:8px">
 							<table class="table table-striped box-border">
 							<thead class="box-head">
 								  <tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Registered</span></strong></td></tr>
@@ -40,7 +40,7 @@
 							</tbody>
 						 </table>
 					</div>
-					<div class="col-md-11 dash_event">
+					<div class="header1 fixed" style ="float:left;margin:8px">
 						<table class="table table-striped box-border">
 						   <thead class="box-head">
 							  <tr>
@@ -65,56 +65,6 @@
 					</div>
 				</div> <!-- Row closing -->		
 
-							<%if @role == "host"%>
-
-				<div class="row">
-					<div class="col-md-11 col-md-offset-1 dash_event">
-						<table class="table table-striped box-border">
-							<thead class="box-head some" id="button">
-								  <tr><td colspan='3'><strong>Events <span style="color:#e06d21;">Need to Host</span></strong></td></tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><strong>Title</strong></td>
-									<td><strong>Venue</strong></td>
-									<td><strong>Start Date</strong></td>
-								</tr>
-								<% @events_for_publish.each do |event|%>
-								<tr>
-									<td><%= event.title %></td>
-									<td><%= event.venue %></td>
-									<td><%= event.event_start_date %></td>
-								</tr>
-								<% end %>
-							</tbody>
-						 </table>
-					</div>
-					<div class="col-md-11 dash_event">
-						<table class="table table-striped box-border" id ="effect">
-						   <thead class="box-head" >
-							  <tr>
-								<tr><td colspan='3'><strong>Events <span style="color:#e06d21;">Published By You</span></strong></td></tr>
-							  </tr>
-						   </thead>
-						  <tbody>
-								<tr>
-									<td><strong>Title</strong></td>
-									<td><strong>Venue</strong></td>
-									<td><strong>Start Date</strong></td>
-								</tr>
-								<% @events_published_by_you.each do |event|%>
-								<tr>
-									<td><%= event.title %></td>
-									<td><%= event.venue %></td>
-									<td><%= event.event_start_date %></td>
-								</tr>
-								<% end %>
-							</tbody>
-						 </table>
-					</div>
-				</div> <!-- Row closing -->		
-
-							<% end %>
 
 			<div class="clearfix"></div>
 			</div> <!-- Content-section closing -->
@@ -123,3 +73,35 @@
     </div><!-- Container Admin closing -->	
 	</section>
 	
+<style>
+
+.fixed{
+    width:45%;
+
+}
+
+.expand{
+    width: 80%;
+    height: 200px; 
+        
+}
+
+</style>
+
+<script>
+$(document).ready(function(){
+
+$(".header1").toggle(function(){
+	alert("hi")
+	$(".header1").addClass("fixed");
+	$(this).addClass( "expand");
+
+},function() {   
+     $( this ).removeClass( "expand" );
+     $( this ).addClass( "fixed");
+      
+})
+
+
+});
+</script>
