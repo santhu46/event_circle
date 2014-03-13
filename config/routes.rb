@@ -13,6 +13,7 @@ EventCircle::Application.routes.draw do
   resources :events do
     member do
       get 'register'
+      get 'publish'
     end
   end
   root :to => 'home#index'

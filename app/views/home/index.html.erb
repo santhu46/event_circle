@@ -17,9 +17,9 @@
 			<div class="content-section">
 			<h2 class="title">Dashboard</h2>
 				<div class="some">
-					<div class="header1 fixed" style ="float:left;margin:8px">
-							<table class="table table-striped box-border">
-							<thead class="box-head">
+				<div class="header1 fixed" style ="float:left;margin:8px">
+						<table class="table table-striped box-border table-dummy">
+						   <thead class="box-head">
 								  <tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Registered</span></strong></td></tr>
 								  
 							</thead>
@@ -30,18 +30,54 @@
 									<td><strong>Venue</strong></td>
 									<td><strong>Start Date</strong></td>
 								</tr>
-								<% @events_attended.each do |event|%>
+								<% @events_attended.to_enum.with_index(1) do |event,i |%>
 								<tr>
 									<td><%= event.title %></td>
 									<td><%= event.venue %></td>
 									<td><%= event.event_start_date %></td>
 								</tr>
+								<% break if i==3 %>
 								<% end %>
-							</tbody>
+						  </tbody>
 						 </table>
+
+						 <table class="table table-striped box-border table-main" style="display:none">
+						   <thead class="box-head">
+							  <tr>
+								<tr><td colspan="6"><strong>Events <span style="color:#e06d21;">Registered</span></strong></td></tr>
+							  </tr>
+						   </thead>
+						   <tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+									<td><strong>End Date</strong></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<% @events_attended.each do |event|%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+									<td><%= event.created_at %></td>
+									<% if can? :read, event %>
+                                     <td><%= link_to 'Show', event %></td>
+                                      <% if current_user.is_registered?(event) %>
+                                     <td><%= link_to 'Registered', '#',class: "test"%></td>
+                                   <% else %>
+                                 <td><%= link_to 'Register', register_event_path(event)%></td>  
+                                <% end %>
+                                  <% end %>
+								</tr>
+								<% end %>
+						  </tbody>
+						 </table>
+
 					</div>
 					<div class="header1 fixed" style ="float:left;margin:8px">
-						<table class="table table-striped box-border">
+						<table class="table table-striped box-border table-dummy">
 						   <thead class="box-head">
 							  <tr>
 								<tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Running</span></strong></td></tr>
@@ -53,17 +89,183 @@
 									<td><strong>Venue</strong></td>
 									<td><strong>Start Date</strong></td>
 								</tr>
-								<% @events_published.each do |event|%>
+								<% @events_published.to_enum.with_index(1) do |event,i |%>
 								<tr>
 									<td><%= event.title %></td>
 									<td><%= event.venue %></td>
 									<td><%= event.event_start_date %></td>
 								</tr>
+								<% break if i==3 %>
 								<% end %>
 						  </tbody>
 						 </table>
+
+
+						 <table class="table table-striped box-border table-main" style="display:none">
+						   <thead class="box-head">
+							  <tr>
+								<tr><td colspan="6"><strong>Events <span style="color:#e06d21;">Running</span></strong></td></tr>
+							  </tr>
+						   </thead>
+						   <tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+									<td><strong>End Date</strong></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<% @events_published.each do |event|%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+									<td><%= event.created_at %></td>
+									<% if can? :read, event %>
+                                     <td><%= link_to 'Show', event %></td>
+                                      <% if current_user.is_registered?(event) %>
+                                     <td><%= link_to 'Registered', '#',class: "test"%></td>
+                                   <% else %>
+                                 <td><%= link_to 'Register', register_event_path(event)%></td>  
+                                <% end %>
+                                  <% end %>
+								</tr>
+								<% end %>
+						  </tbody>
+						 </table>
+
 					</div>
 				</div> <!-- Row closing -->		
+
+
+							<%if @role == "host"%>  <!-- for HOST -->
+							<div class="some">
+				<div class="header1 fixed" style ="float:left;margin:8px">
+						<table class="table table-striped box-border table-dummy">
+						   <thead class="box-head">
+								  <tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Published By You</span></strong></td></tr>
+								  
+							</thead>
+						
+							<tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+								</tr>
+							<% @events_published_by_you.to_enum.with_index(1) do |event,i |%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+								</tr>
+								<% break if i==3 %>
+								<% end %>
+						  </tbody>
+						 </table>
+
+						 <table class="table table-striped box-border table-main" style="display:none">
+						   <thead class="box-head">
+							  <tr>
+								<tr><td colspan="6"><strong>Events <span style="color:#e06d21;">Published By You</span></strong></td></tr>
+							  </tr>
+						   </thead>
+						   <tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+									<td><strong>End Date</strong></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<% @events_published_by_you.each do |event|%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+									<td><%= event.created_at %></td>
+									<% if can? :read, event %>
+                                     <td><%= link_to 'Show', event %></td>
+                                      <% if current_user.is_registered?(event) %>
+                                     <td><%= link_to 'Registered', '#',class: "test"%></td>
+                                   <% else %>
+                                 <td><%= link_to 'Register', register_event_path(event)%></td>  
+                                <% end %>
+                                  <% end %>
+								</tr>
+								<% end %>
+						  </tbody>
+						 </table>
+
+					</div>
+					<div class="header1 fixed" style ="float:left;margin:8px">
+						<table class="table table-striped box-border table-dummy">
+						   <thead class="box-head">
+							  <tr>
+								<tr><td colspan="3"><strong>Events <span style="color:#e06d21;">Need To Publish</span></strong></td></tr>
+							  </tr>
+						   </thead>
+						   <tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+								</tr>
+							<% @events_for_publish.to_enum.with_index(1) do |event,i |%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+								</tr>
+								<% break if i==3 %>
+								<% end %>
+						  </tbody>
+						 </table>
+
+
+						 <table class="table table-striped box-border table-main" style="display:none">
+						   <thead class="box-head">
+							  <tr>
+								<tr><td colspan="6"><strong>Events <span style="color:#e06d21;">Need To Publish</span></strong></td></tr>
+							  </tr>
+						   </thead>
+						   <tbody>
+							<tr>
+									<td><strong>Title</strong></td>
+									<td><strong>Venue</strong></td>
+									<td><strong>Start Date</strong></td>
+									<td><strong>End Date</strong></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<% @events_for_publish.each do |event|%>
+								<tr>
+									<td><%= event.title %></td>
+									<td><%= event.venue %></td>
+									<td><%= event.event_start_date %></td>
+									<td><%= event.created_at %></td>
+									<% if can? :read, event %>
+                                     <td><%= link_to 'Show', event %></td>
+                                <% if can? :update, event %>
+
+                                <td><%= link_to 'Publish', publish_event_path(event)%></td>  
+                                <% end %>
+                                  <% end %>
+								</tr>
+								<% end %>
+						  </tbody>
+						 </table>
+
+					</div>
+				</div> <!-- Row closing -->		
+
+
+
+				
+							<% end %>
+
 
 
 			<div class="clearfix"></div>
@@ -90,18 +292,22 @@
 
 <script>
 $(document).ready(function(){
+var a = 1;
+$(".header1").click(function(){
+	
+	if(false==$(this).hasClass('expand')){
 
-$(".header1").toggle(function(){
-	alert("hi")
-	$(".header1").addClass("fixed");
-	$(this).addClass( "expand");
+		$(".table-dummy").show();
+	    $(".table-main").hide();
+		$(this).children(".table-dummy").hide();
+		$(this).children(".table-main").show();
 
-},function() {   
-     $( this ).removeClass( "expand" );
-     $( this ).addClass( "fixed");
-      
-})
+$(".header1").addClass("fixed")
+$(".header1").removeClass("expand")
+$(this).addClass( "expand");
 
-
+	}
+		
+});
 });
 </script>

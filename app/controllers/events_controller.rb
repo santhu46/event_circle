@@ -85,8 +85,24 @@ class EventsController < ApplicationController
     @event.registered_users << current_user
 
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'You Registered for a event successfully.' }
+      format.html { redirect_to root_path, notice: 'You Registered for a event successfully.' }
       format.json { head :no_content }
+    end
+  end
+
+  def publish
+    @event = Event.find(params[:id])
+    @event.published = true
+    @event.published_at = Time.now
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to root_path, notice: 'Event was successfully published.' }
+        format.json { render json: @event, status: :created, location: @event }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
 end
